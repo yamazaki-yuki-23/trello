@@ -3,13 +3,81 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const savedLists = localStorage.getItem('trello-lists')
+
+const store = new Vuex.Store({
   state: {
+    lists: savedLists ? JSON.parse(savedLists): [
+      {
+        title: 'Backlog',
+        cards: [
+          { body: 'English', description: 'hello' },
+          { body: 'Mathematics' },
+        ]
+      },
+      {
+        title: 'Todo',
+        cards: [
+          { body: 'Science' }
+        ]
+      },
+      {
+        title: 'Doing',
+        cards: []
+      }
+    ],
   },
   mutations: {
+    addlist(state, payload ) {
+      state.lists.push({ title: payload.title, cards: [] })
+    },
+    removelist(state, payload ) {
+      state.lists.splice(payload.listIndex, 1)
+    },
+    addCardToList(state, payload) {
+      state.lists[payload.listIndex].cards.push({ body: payload.body })
+    },
+    removeCardFromList(state, payload) {
+      state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1)
+    },
+    updateList(state, payload) {
+      state.lists = payload.lists
+    },
+    saved(state, payload) {
+      state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1, {body: payload.body, description: payload.description, date: payload.date })
+    }
   },
   actions: {
+    addlist(context, payload ) {
+      context.commit('addlist', payload )
+    },
+    removelist(context, payload) {
+      context.commit('removelist', payload)
+    },
+    addCardToList(context, payload) {
+      context.commit('addCardToList', payload)
+    },
+    removeCardFromList(context, payload) {
+      context.commit('removeCardFromList', payload)
+    },
+    updateList(context, payload) {
+      context.commit('updateList', payload)
+    },
+    saved(context, payload) {
+      context.commit('saved', payload)
+    }
   },
-  modules: {
+  getters: {
+    totalCardCount(state) {
+      let count = 0
+      state.lists.map(content => count += content.cards.length)
+      return count
+    }
   }
 })
+
+store.subscribe(( mutation, state ) => {
+  localStorage.setItem('trello-lists', JSON.stringify( state.lists ))
+})
+
+export default store
