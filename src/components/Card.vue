@@ -59,12 +59,11 @@
                 dialogFormVisible: false,
                 modalState: false,
                 oldBody: this.body,
+                oldDescription: this.card.description,
+                oldDate: this.card.date,
                 formLabelWidth: '120px',
                 description: '',
                 pickerOptions: {
-                    // disabledDate(time) {
-                    //     return time.getTime() > Date.now();
-                    // },
                     shortcuts: [{
                         text: '今日',
                         onClick(picker) {
@@ -100,12 +99,12 @@
             },
             bodyColor() {
                 let now = new Date()
-                if(now.getDate() - new Date(this.card.date).getDate() < 0) {
+                if(new Date(this.card.date).getDate() - now.getDate() < 0) {
+                    return "2px solid #ccc"
+                } else if(new Date(this.card.date).getDate() - now.getDate() <= 3) {
                     return "2px solid red"
-                } else if(now.getDate() - new Date(this.card.date).getDate() <= 3) {
-                    return "2px solid yellow"
                 } else {
-                    return false 
+                    return "white" 
                 }
             }
         },
@@ -124,6 +123,8 @@
                         })
                         this.dialogFormVisible = false
                         this.oldBody = this.card.body
+                        this.oldDescription = this.card.description
+                        this.oldDate = this.card.date
                     } else {
                         return false;
                     }
@@ -131,6 +132,8 @@
             },
             cancel() {
                 this.card.body = this.oldBody
+                this.card.description = this.oldDescription
+                this.card.date = this.oldDate
                 this.dialogFormVisible = false
             }
         },

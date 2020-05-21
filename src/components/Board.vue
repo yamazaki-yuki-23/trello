@@ -4,7 +4,7 @@
             Trello
         </header>
         <main>
-            <p class="info-line">タスク数: {{ totalCardCount }}</p>
+            <p class="info-line">カード数: {{ totalCardCount }}</p>
             <div class="list-index">
                 <draggable :list="lists" @end="movingList" class="list-index">
                     <list

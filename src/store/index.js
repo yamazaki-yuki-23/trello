@@ -9,20 +9,20 @@ const store = new Vuex.Store({
   state: {
     lists: savedLists ? JSON.parse(savedLists): [
       {
-        title: 'Backlog',
-        cards: [
-          { body: 'English', description: 'hello' },
-          { body: 'Mathematics' },
-        ]
-      },
-      {
         title: 'Todo',
         cards: [
-          { body: 'Science' }
+          { body: '取引先との打ち合わせ', description: '場所：新宿' },
+          { body: 'メール配信' },
         ]
       },
       {
-        title: 'Doing',
+        title: '作業中',
+        cards: [
+          { body: '本の執筆活動' }
+        ]
+      },
+      {
+        title: '完了',
         cards: []
       }
     ],
