@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" :style="{border:bodyColor}">
         <el-button type="primary" class="close-button" icon="el-icon-edit" size="mini" circle @click="dialogFormVisible = true"></el-button>
         <div class="body">{{ card.body }}</div>
         <el-dialog title="タスク編集" :visible.sync="dialogFormVisible" class="modal-title" :show-close="false" :close-on-click-modal="textCheck">
@@ -15,7 +15,7 @@
                         v-model="card.description">
                     </el-input>
                 </el-form-item>
-                <el-form-item label="日付" :label-width="formLabelWidth">
+                <el-form-item label="終了日" :label-width="formLabelWidth">
                     <div class="block">
                         <el-date-picker
                             v-model="card.date"
@@ -97,6 +97,16 @@
         computed: {
             textCheck() {
                 return this.card.body.trim().length > 0 ? true : false
+            },
+            bodyColor() {
+                let now = new Date()
+                if(now.getDate() - new Date(this.card.date).getDate() <= 0) {
+                    return "2px solid red"
+                } else if(now.getDate() - new Date(this.card.date).getDate() <= 3) {
+                    return "2px solid yellow"
+                } else {
+                    return false 
+                }
             }
         },
         methods: {
@@ -119,15 +129,9 @@
                     }
                 });
             },
-            cancel(card) {
-                this.$refs[card].validate((valid) => {
-                    if (valid) {
-                        this.dialogFormVisible = false
-                        this.card.body = this.oldBody
-                    } else {
-                        return false;
-                    }
-                });
+            cancel() {
+                this.card.body = this.oldBody
+                this.dialogFormVisible = false
             }
         },
     }
