@@ -100,7 +100,7 @@
             },
             bodyColor() {
                 let now = new Date()
-                if(now.getDate() - new Date(this.card.date).getDate() <= 0) {
+                if(now.getDate() - new Date(this.card.date).getDate() < 0) {
                     return "2px solid red"
                 } else if(now.getDate() - new Date(this.card.date).getDate() <= 3) {
                     return "2px solid yellow"
