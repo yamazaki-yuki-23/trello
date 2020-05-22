@@ -5,7 +5,7 @@
         </header>
         <main>
             <!-- <button v-on:click="downloadCSV">ダウンロード</button> -->
-            <el-button type="info" class="download" size="mini" v-on:click="downloadCSV">ダウンロード</el-button>
+            <el-button type="info" class="csv-output" size="mini" v-on:click="downloadCSV">リスト出力</el-button>
             <p class="info-line">カード数: {{ totalCardCount }}</p>
             <div class="list-index">
                 <draggable :list="lists" @end="movingList" class="list-index">
