@@ -45,9 +45,22 @@
         },
         methods: {
             removeList() {
-                if(confirm('本当のこのリストを削除しますか？')) {
+                this.$confirm('本当にこのリストを削除しますか？',{
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '削除されました'
+                    });
                     this.$store.dispatch('removelist', { listIndex: this.listIndex })
-                }
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: 'キャンセルされました'
+                    });
+                });
             },
         }
     }

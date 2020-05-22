@@ -113,10 +113,23 @@
         },
         methods: {
             removeCardFromList() {
-                if(confirm('本当にこのカードを削除しますか？')) {
+                this.$confirm('本当にこのカードを削除しますか?', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '削除されました'
+                    });
                     this.$store.dispatch('removeCardFromList', { cardIndex: this.cardIndex, listIndex: this.listIndex })
                     this.dialogFormVisible = false
-                }
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: 'キャンセルされました'
+                    });
+                });
             },
             saved(card) {
                 this.$refs[card].validate((valid) => {
