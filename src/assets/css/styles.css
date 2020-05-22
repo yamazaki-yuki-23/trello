@@ -26,12 +26,18 @@ main {
   height: 100%;
 }
 
+.download {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+}
+
 .info-line {
   /* margin: 20px; */
   position: absolute;
   right: 40px;
-  top: 30px;
-  font-size: 20px;
+  top: 60px;
+  font-size: 18px;
 }
 
 .list-index {

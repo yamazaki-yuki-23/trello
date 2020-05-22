@@ -102,9 +102,9 @@
                 var ms = new Date(this.card.date).getTime() - now.getTime();
                 var days = Math.round(ms / (1000*60*60*24));
                 console.log(days)
-                if(days <= 0) {
+                if(days < 0) {
                     return "3px solid #ccc"
-                } else if(days <= 3) {
+                } else if(days < 3) {
                     return "3px solid red"
                 } else {
                     return "white" 
