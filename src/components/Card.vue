@@ -98,11 +98,14 @@
                 return this.card.body.trim().length > 0 ? true : false
             },
             bodyColor() {
-                let now = new Date()
-                if(new Date(this.card.date).getDate() - now.getDate() < 0) {
-                    return "2px solid #ccc"
-                } else if(new Date(this.card.date).getDate() - now.getDate() <= 3) {
-                    return "2px solid red"
+                var now = new Date()
+                var ms = new Date(this.card.date).getTime() - now.getTime();
+                var days = Math.round(ms / (1000*60*60*24));
+                console.log(days)
+                if(days <= 0) {
+                    return "3px solid #ccc"
+                } else if(days <= 3) {
+                    return "3px solid red"
                 } else {
                     return "white" 
                 }
