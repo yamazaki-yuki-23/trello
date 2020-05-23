@@ -169,10 +169,17 @@ main {
   font-size: 18px;
   width: 100%;
   word-wrap: break-word;
+  color: #172b4d;
 }
 
 .task-delete {
   position: absolute;
   top: 20px;
   right: 20px;  
+}
+
+.time {
+  position: relative;
+  color: #172b4d;
+  top: 30px;
 }

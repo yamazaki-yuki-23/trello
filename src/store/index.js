@@ -44,7 +44,7 @@ const store = new Vuex.Store({
       state.lists = payload.lists
     },
     saved(state, payload) {
-      state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1, {body: payload.body, description: payload.description, date: payload.date })
+      state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1, {body: payload.body, description: payload.description, date: payload.date, color: payload.color })
     }
   },
   actions: {

@@ -1,8 +1,9 @@
 <template>
-    <div class="card" :style="{border:bodyColor}">
+    <div class="card" :style="{ border: bodyBorder, backgroundColor: bodyColor }">
         <el-button type="primary" class="close-button" icon="el-icon-edit" size="mini" circle @click="dialogFormVisible = true"></el-button>
         <div class="body">{{ card.body }}</div>
-        <el-dialog title="タスク編集" :visible.sync="dialogFormVisible" class="modal-title" :show-close="false" :close-on-click-modal="textCheck">
+        <p class="time">{{ changeDateType }}</p>
+        <el-dialog title="タスク編集" :visible.sync="dialogFormVisible" class="modal-title" :show-close="false" :close-on-click-modal="textCheck" :before-close="handleClose">
             <el-button type="danger" class="task-delete" @click="removeCardFromList">削除</el-button>
             <el-form :model="card" :rules="rules" ref="card">
                 <el-form-item label="タイトル" :label-width="formLabelWidth" prop="body">
@@ -21,9 +22,20 @@
                             v-model="card.date"
                             type="date"
                             placeholder="年/月/日"
+                            format="yyyy/MM/dd"
                             :picker-options="pickerOptions">
                         </el-date-picker>
                     </div>
+                </el-form-item>
+                <el-form-item label="テーマ" :label-width="formLabelWidth">
+                    <el-select v-model="value" placeholder="選択する">
+                        <el-option
+                            v-for="item in colorOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -58,9 +70,10 @@
             return {
                 dialogFormVisible: false,
                 modalState: false,
-                oldBody: this.body,
+                oldBody: this.card.body,
                 oldDescription: this.card.description,
                 oldDate: this.card.date,
+                oldColor: this.card.color,
                 formLabelWidth: '120px',
                 description: '',
                 pickerOptions: {
@@ -90,24 +103,63 @@
                     body: [
                         { required: true, message: '必須項目です', trigger: 'blur'}
                     ]
-                }
+                },
+                colorOptions: [{
+                    value: '#FF0000',
+                    label: '赤'
+                }, {
+                    value: '#FFA500',
+                    label: 'オレンジ'
+                }, {
+                    value: '#A52A2A',
+                    label: '茶色'
+                }, {
+                    value: '#FFFF00',
+                    label: '黄色'
+                }, {
+                    value: '#008000',
+                    label: '緑'
+                }, {
+                    value: '#800080',
+                    label: '紫'
+                }, {
+                    value: '#0000FF',
+                    label: '青'
+                }, {
+                    value: '#FFFFFF',
+                    label: '白'
+                }],
+                value: this.card.color
             }
         },
         computed: {
             textCheck() {
                 return this.card.body.trim().length > 0 ? true : false
             },
-            bodyColor() {
+            bodyBorder() {
                 var now = new Date()
                 var ms = new Date(this.card.date).getTime() - now.getTime();
                 var days = Math.round(ms / (1000*60*60*24));
-                console.log(days)
                 if(days < 0) {
                     return "3px solid #ccc"
                 } else if(days < 3) {
                     return "3px solid red"
                 } else {
                     return "white" 
+                }
+            },
+            bodyColor() {
+                return this.card.color
+            },
+            changeDateType() {
+                if(this.card.date){
+                    var year = new Date(this.card.date).getFullYear()
+                    var month = new Date(this.card.date).getMonth() + 1;
+                    var day = new Date(this.card.date).getDate();
+                    var formatDay = year+"/"+month+"/"+day;
+                    return formatDay
+                } else {
+                    return ""
                 }
             }
         },
@@ -135,12 +187,13 @@
                 this.$refs[card].validate((valid) => {
                     if (valid) {
                         this.$store.dispatch('saved', {
-                            listIndex: this.listIndex, cardIndex: this.cardIndex, body: this.card.body, description: this.card.description, date: this.card.date 
+                            listIndex: this.listIndex, cardIndex: this.cardIndex, body: this.card.body, description: this.card.description, date: this.card.date, color: this.value 
                         })
-                        this.dialogFormVisible = false
                         this.oldBody = this.card.body
                         this.oldDescription = this.card.description
                         this.oldDate = this.card.date
+                        this.oldColor = this.value
+                        this.dialogFormVisible = false
                     } else {
                         return false;
                     }
@@ -150,6 +203,14 @@
                 this.card.body = this.oldBody
                 this.card.description = this.oldDescription
                 this.card.date = this.oldDate
+                this.value = this.oldColor
+                this.dialogFormVisible = false
+            },
+            handleClose() {
+                this.card.body = this.oldBody
+                this.card.description = this.oldDescription
+                this.card.date = this.oldDate
+                this.value = this.oldColor
                 this.dialogFormVisible = false
             }
         },

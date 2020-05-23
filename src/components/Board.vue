@@ -1,11 +1,9 @@
 <template>
     <div>
         <header>
-            Trello
+            My  Sticky
         </header>
         <main>
-            <!-- <button v-on:click="downloadCSV">ダウンロード</button> -->
-            <!-- <el-button type="info" class="csv-output" size="mini" v-on:click="downloadCSV" :disabled="!checkCardCount">カード出力</el-button> -->
             <el-button type="info" class="csv-output" size="small" v-on:click="downloadCSV" :disabled="!checkCardCount">カード出力<i class="el-icon-upload el-icon-right"></i></el-button>
             <p class="info-line">カード数: {{ totalCardCount }}</p>
             <div class="list-index">
@@ -46,15 +44,6 @@ export default {
         },
         checkCardCount() {
             return this.totalCardCount > 0
-        }
-    },
-    data() {
-        return {
-            items: [
-                { name: 'りんご', price: '100' },
-                { name: 'みかん', price: '50' },
-                { name: 'マンゴー', price: '3000' }
-            ]
         }
     },
     methods: {
