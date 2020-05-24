@@ -3,7 +3,7 @@
         <el-button type="primary" class="close-button" icon="el-icon-edit" size="mini" circle @click="dialogFormVisible = true"></el-button>
         <div class="body">{{ card.body }}</div>
         <p class="time">{{ changeDateType }}</p>
-        <el-dialog title="タスク編集" :visible.sync="dialogFormVisible" class="modal-title" :show-close="false" :close-on-click-modal="textCheck" :before-close="handleClose">
+        <el-dialog title="タスク編集" :visible.sync="dialogFormVisible" class="modal-title" :show-close="false" :close-on-click-modal="textCheck" :before-close="handleClose" width="60%">
             <el-button type="danger" class="task-delete" @click="removeCardFromList">削除</el-button>
             <el-form :model="card" :rules="rules" ref="card">
                 <el-form-item label="タイトル" :label-width="formLabelWidth" prop="body">
@@ -23,7 +23,8 @@
                             type="date"
                             placeholder="年/月/日"
                             format="yyyy/MM/dd"
-                            :picker-options="pickerOptions">
+                            :picker-options="pickerOptions"
+                            style="max-width: 100%;">
                         </el-date-picker>
                     </div>
                 </el-form-item>
@@ -33,7 +34,8 @@
                             v-for="item in colorOptions"
                             :key="item.value"
                             :label="item.label"
-                            :value="item.value">
+                            :value="item.value"
+                            style="width:100%;">
                         </el-option>
                     </el-select>
                 </el-form-item>

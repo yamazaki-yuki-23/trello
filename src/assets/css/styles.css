@@ -183,3 +183,12 @@ main {
   color: #172b4d;
   top: 30px;
 }
+
+.el-dialog__title {
+  font-size: 1.3rem !important;
+  font-weight: 400;
+}
+
+.el-dialog__header {
+  padding: 40px 20px 10px !important;
+}
