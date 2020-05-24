@@ -1,5 +1,5 @@
 <template>
-    <div class="card" :style="{ border: bodyBorder, backgroundColor: bodyColor }">
+    <div class="card" :style="{ border: bodyBorder, backgroundColor: card.color }">
         <el-button type="primary" class="close-button" icon="el-icon-edit" size="mini" circle @click="dialogFormVisible = true"></el-button>
         <div class="body">{{ card.body }}</div>
         <p class="time">{{ changeDateType }}</p>
@@ -28,7 +28,7 @@
                     </div>
                 </el-form-item>
                 <el-form-item label="テーマ" :label-width="formLabelWidth">
-                    <el-select v-model="value" placeholder="選択する">
+                    <el-select v-model="value" placeholder="選択する" @change="preview">
                         <el-option
                             v-for="item in colorOptions"
                             :key="item.value"
@@ -148,9 +148,6 @@
                     return "white" 
                 }
             },
-            bodyColor() {
-                return this.card.color
-            },
             changeDateType() {
                 if(this.card.date){
                     var year = new Date(this.card.date).getFullYear()
@@ -203,15 +200,18 @@
                 this.card.body = this.oldBody
                 this.card.description = this.oldDescription
                 this.card.date = this.oldDate
-                this.value = this.oldColor
+                this.card.color = this.value =  this.oldColor
                 this.dialogFormVisible = false
             },
             handleClose() {
                 this.card.body = this.oldBody
                 this.card.description = this.oldDescription
                 this.card.date = this.oldDate
-                this.value = this.oldColor
+                this.card.color = this.value = this.oldColor
                 this.dialogFormVisible = false
+            },
+            preview(){
+                this.card.color = this.value
             }
         },
     }
