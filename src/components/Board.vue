@@ -65,7 +65,7 @@ export default {
             let blob = new Blob([csv], { type: 'text/csv' })
             let link = document.createElement('a')
             link.href = window.URL.createObjectURL(blob)
-            link.download = 'trello.csv'
+            link.download = 'my-sticky.csv'
             link.click()
         },
         ValidateCard(card) {
