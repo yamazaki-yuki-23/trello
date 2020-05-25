@@ -25,7 +25,7 @@
 
 <script>
 import draggable from 'vuedraggable'
-import ListAdd from './LIstAdd'
+import ListAdd from './ListAdd'
 import List from './List'
 import { mapState } from 'vuex'
 

@@ -3,13 +3,13 @@
         <input
             v-model="title" 
             type="text"
-            class="text-input"
+            class="text-input add-list"
             placeholder="リストを作成"
             @focusin="startEditing"
             @focusout="finishEditing"
         >
         <button type="submit"
-                class="add-button"
+                class="add-button add-list"
                 v-if="isEditing || titleExists"
         >
             追加する

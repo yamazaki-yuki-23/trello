@@ -107,29 +107,26 @@
                     ]
                 },
                 colorOptions: [{
-                    value: '#FF0000',
-                    label: '赤'
+                    value: '#FADBDA',
+                    label: 'レッド'
                 }, {
-                    value: '#FFA500',
+                    value: '#FFE6C1',
                     label: 'オレンジ'
                 }, {
-                    value: '#A52A2A',
-                    label: '茶色'
+                    value: '#FFFC7F',
+                    label: 'イエロー'
                 }, {
-                    value: '#FFFF00',
-                    label: '黄色'
+                    value: '#B6FFB5',
+                    label: 'グリーン'
                 }, {
-                    value: '#008000',
-                    label: '緑'
+                    value: '#B5E2FF',
+                    label: 'スカイブルー'
                 }, {
-                    value: '#800080',
-                    label: '紫'
-                }, {
-                    value: '#0000FF',
-                    label: '青'
+                    value: '#D1D1D1',
+                    label: 'グレー'
                 }, {
                     value: '#FFFFFF',
-                    label: '白'
+                    label: 'ホワイト'
                 }],
                 value: this.card.color
             }
