@@ -1,7 +1,10 @@
 <template>
     <div class="list">
         <div class="listheader">
-            <p class="list-title">{{ title }}</p>
+            <div>
+                <input v-if="!editMode" type="text" class="edit-title" @click="changeEditMode" :value="title">
+                <input v-else type="text" class="input-list" v-model="listTitle" @focusout="changeEditMode">
+            </div>
             <div class="deletelist" @click="removeList">×</div>
         </div>
         <draggable group="cards" :list="cards" @end="$emit('change')">
@@ -43,6 +46,17 @@
                 required: true
             }
         },
+        data() {
+            return {
+                editMode: false,
+                listTitle: this.title
+            }
+        },
+        watch: {
+            listTitle() {
+                this.$store.dispatch('editList', { title: this.listTitle, listIndex: this.listIndex })
+            }
+        },
         methods: {
             removeList() {
                 this.$confirm('本当にこのリストを削除しますか？',{
@@ -61,6 +75,9 @@
                         message: 'キャンセルされました'
                     });
                 });
+            },
+            changeEditMode() {
+                this.editMode = !this.editMode
             }
         }
     }

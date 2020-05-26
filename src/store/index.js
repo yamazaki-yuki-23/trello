@@ -43,6 +43,9 @@ const store = new Vuex.Store({
     updateList(state, payload) {
       state.lists = payload.lists
     },
+    editList(state, payload) {
+      state.lists[payload.listIndex]['title'] = payload.title
+    },
     saved(state, payload) {
       state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1, {body: payload.body, description: payload.description, date: payload.date, color: payload.color })
     }
@@ -62,6 +65,9 @@ const store = new Vuex.Store({
     },
     updateList(context, payload) {
       context.commit('updateList', payload)
+    },
+    editList(context, payload) {
+      context.commit('editList', payload)
     },
     saved(context, payload) {
       context.commit('saved', payload)

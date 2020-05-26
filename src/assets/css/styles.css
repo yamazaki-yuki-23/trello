@@ -73,6 +73,19 @@ main {
   cursor: initial;
 }
 
+.input-list {
+  font-size: 20px;
+  font-weight: bold;
+  color: #172b4d;
+  padding: 15px;
+  margin-bottom: 5px;
+  border:none;
+  background:#fff;
+  outline: none;
+  box-shadow: inset 0 0 0 2px #409EFF;
+  width: 100%;
+}
+
 .add-list {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.12), 0 10px 10px rgba(0, 0, 0, 0.24);
 }
@@ -137,7 +150,12 @@ main {
 .edit-title {
   font-size: 20px;
   font-weight: bold;
-  width: 100%;
+  color: #172b4d;
+  padding: 15px;
+  border:none;
+  background:none;
+  outline: none;
+  margin-bottom: 5px;
 }
   
 .deletelist {
@@ -160,6 +178,7 @@ main {
   background-color: #fff;
   width: 260px;
   cursor: pointer;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.12), 0 7px 7px rgba(0, 0, 0, 0.24);
 }
 
 .close-button {
@@ -202,4 +221,9 @@ main {
 
 .el-dialog__header {
   padding: 40px 20px 10px !important;
+}
+
+hr {
+  border-width: 2px 0 0 0;
+  border-color: silver; 
 }
